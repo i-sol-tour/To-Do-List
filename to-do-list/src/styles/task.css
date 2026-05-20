@@ -1,0 +1,22 @@
+.task {
+    background-color: white;
+    border-radius: 10px;
+    list-style: none;
+    padding: 10px;
+    margin-bottom: 10px;
+    opacity: 0.9;
+}
+.task:hover {
+    opacity: 1;
+}
+
+.task_content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.task_completed {
+    background-color: #ddddddff;
+    opacity: 0.8;
+}

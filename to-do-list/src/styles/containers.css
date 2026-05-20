@@ -1,0 +1,25 @@
+.list-task-wrapper {
+    display: block;
+    padding: 10px;
+    margin: 20px;
+}
+
+.label-task-completed-container {
+    display: block;
+    color: white;
+}
+
+.list-task-completed-wrapper {
+    display: block;
+}
+
+.list-task-search-container {
+    display: none;
+}
+
+.search-container {
+    display: block;
+    margin-left: auto;
+    padding: 10px;
+    
+}

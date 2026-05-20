@@ -1,0 +1,42 @@
+<!doctype html>
+
+<head>
+  <meta charset="UTF-8" />
+  <title> TO-DO-List</title>
+  <link rel="stylesheet" href="src/styles/main.css">
+  <link rel="stylesheet" href="src/styles/containers.css">
+  <link rel="stylesheet" href="src/styles/form.css">
+  <link rel="stylesheet" href="src/styles/task.css">
+  <link rel="stylesheet" href="src/styles/components.css">
+</head>
+
+<body>
+  <h1>Список задач</h1>
+  <div class="wrapper">
+    <div id="list-task-wrapper" class="list-task-wrapper">
+      <form id="form-add-task">
+        <input id="input-task-new" class="input" type="text" placeholder="Создайте задачу">
+        <button id="button-task-add" class="button">Добавить</button>
+      </form>
+      <ul id="list-task-active">
+      </ul>
+      <div id='label-task-completed-container' class="label-task-completed-container">
+        <h3>Завершенные</h3>
+      </div>
+      <div id="list-task-completed-wrapper">
+        <ul id="list-task-completed">
+        </ul>
+      </div>
+    </div>
+    <div id="list-task-search-container" class="list-task-search-container"></div>
+    <div class="search-container">
+      <input type="text" id="input-search-task" class="input" placeholder="Название задачи...">
+      <button id="button-task-search" class="button">Поиск</button>
+      <button id="button-task-close-search" class="button">X</button>
+    </div>
+  </div>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+
+</html>
