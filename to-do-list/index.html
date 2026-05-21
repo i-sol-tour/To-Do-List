@@ -11,7 +11,9 @@
 </head>
 
 <body>
-  <h1>Список задач</h1>
+  <div class="header">
+    <h1>Список задач</h1>
+  </div>
   <div class="wrapper">
     <div id="list-task-wrapper" class="list-task-wrapper">
       <form id="form-add-task">
@@ -28,11 +30,14 @@
         </ul>
       </div>
     </div>
-    <div id="list-task-search-container" class="list-task-search-container"></div>
+    <div id="list-task-search-container" class="list-task-search-container">
+      <ul id="list-task-search">
+      </ul>
+    </div>
     <div class="search-container">
       <input type="text" id="input-search-task" class="input" placeholder="Название задачи...">
       <button id="button-task-search" class="button">Поиск</button>
-      <button id="button-task-close-search" class="button">X</button>
+      <button id="button-task-close-search" class="button button-close">X</button>
     </div>
   </div>
 

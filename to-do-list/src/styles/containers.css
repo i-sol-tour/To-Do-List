@@ -2,6 +2,7 @@
     display: block;
     padding: 10px;
     margin: 20px;
+    width: 800px;
 }
 
 .label-task-completed-container {
@@ -15,11 +16,25 @@
 
 .list-task-search-container {
     display: none;
+    width: 500px;
+    padding: 10px 15px;
 }
 
 .search-container {
     display: block;
     margin-left: auto;
     padding: 10px;
-    
+
+}
+
+.task-left-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.task_content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }

@@ -1,4 +1,4 @@
-import { addTaskActiveInList, addTaskCompletedInList } from "./modules/render";
+import { addTaskInList, addTaskCompletedInList } from "./modules/render";
 import { checkCompletedTask } from "./modules/render";
 import { addTaskStorage, deletedTaskStorage, tasks } from "./modules/storage";
 import { checkingUniqueTaskName } from "./modules/utils";
@@ -27,20 +27,20 @@ formAddTask.addEventListener('submit', (event) => {
       return;
     };
     addTaskStorage(inputTaskNew.value);
-    listTaskActive.prepend(addTaskActiveInList(inputTaskNew.value));
+    listTaskActive.prepend(addTaskInList(inputTaskNew.value));
     inputTaskNew.value = '';
   }
 });
 
 listTaskStandart.addEventListener('click', (event) => {
-  console.log("Клик")
   const checkbox = event.target.closest('input');
   const button = event.target.closest('button');
+  const divTaskCompleted = event.target.closest('div');
 
   if (button) {
     const label = button.closest('div')
       .querySelector('.taskLeftContainer label');
-    if (!label){
+    if (!label) {
       return;
     }
     const liText = label.textContent
@@ -52,14 +52,11 @@ listTaskStandart.addEventListener('click', (event) => {
   };
   if (checkbox) {
     const label = checkbox.parentElement.querySelector('label');
-    if (!label){
-      console.log('lable')
+    if (!label) {
       return;
     }
     const liText = label.textContent
-    console.log("liText", liText)
     if (checkbox.checked == true) {
-      console.log("Перевод в выполнено")
       deletedTaskStorage(liText);
       addTaskStorage(liText, 'complete');
       listTaskCompleted.prepend(addTaskCompletedInList(liText));
@@ -67,15 +64,13 @@ listTaskStandart.addEventListener('click', (event) => {
       li.remove();
     }
   }
-  const divTaskCompleted = event.target.closest('div');
+
   if (divTaskCompleted) {
-    if (divTaskCompleted.id == 'labelTaskCompled') {
-      console.log('Нажата кнопка Завершенные')
+    if (divTaskCompleted.id == 'label-task-completed-container') {
       displayListTaskCompleted();
     }
   };
   checkCompletedTask();
-  console.log(tasks)
 });
 
 buttonSearchTask.addEventListener('click', () => {
@@ -96,12 +91,10 @@ buttonCloseSearchTask.addEventListener('click', () => {
 });
 
 
-
 function getTasksList() {
   const tasks = JSON.parse(localStorage.getItem('tasks'));
-  console.log(tasks)
   for (let task of tasks.active) {
-    listTaskActive.append(addTaskActiveInList(task));
+    listTaskActive.append(addTaskInList(task));
   }
   for (let task of tasks.completed) {
     listTaskCompleted.append(addTaskCompletedInList(task));

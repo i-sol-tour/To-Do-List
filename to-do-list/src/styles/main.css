@@ -1,5 +1,12 @@
 .wrapper{
     display: flex;
     background-color:rgb(41, 131, 56);
-    font-family: Verdana 
+    font-family: Verdana;
+    min-height: 100vh;
+}
+
+.header{
+    background-color:rgb(32, 102, 44);
+    font-family: Verdana;
+    height: 100px;
 }
