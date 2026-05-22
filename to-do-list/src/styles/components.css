@@ -19,10 +19,14 @@ h1 {
     border: 1px solid #bebebe;
     border-radius: 10px;
     cursor: pointer;
-}
 
-.button:hover {
-    background-color: white;
+    &:hover{
+        background-color: white;
+    }
+
+    &:active {
+    transform: scale(0.95);
+  }
 }
 
 .button-close {
@@ -31,6 +35,47 @@ h1 {
     border: 1px solid #bebebe;
     border-radius: 10px;
     cursor: pointer;
+}
+
+.button-deleted {
+  width: 50px;
+  height: 20px;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.button-deleted .trash-closed {
+  display: block;
+}
+
+.button-deleted .trash-open {
+  display: none;
+  transform: scale(1.05);
+}
+
+/* При наведении меняем иконки */
+.button-deleted:hover .trash-closed {
+  display: none;
+}
+
+.button-deleted:hover .trash-open {
+  transform: scale(1.2);
+  display: block;
+}
+
+.button-deleted:active .trash-open {
+  filter: brightness(0) saturate(100%) invert(16%) sepia(99%) saturate(7402%) hue-rotate(2deg) brightness(92%) contrast(118%);
+}
+
+.button-deleted img {
+  width: 20px;
+  height: 20px;
 }
 
 .task-checkbox {

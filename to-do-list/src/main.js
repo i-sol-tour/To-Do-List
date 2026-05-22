@@ -39,13 +39,12 @@ listTaskStandart.addEventListener('click', (event) => {
 
   if (button) {
     const label = button.closest('div')
-      .querySelector('.taskLeftContainer label');
+      .querySelector('.task-left-container label');
     if (!label) {
       return;
     }
-    const liText = label.textContent
-    if (button.id == 'butDeletedTask') {
-      deletedTaskStorage(liText); // передаем в функцию только 1 фрагмент текста без кнопок
+    if (button.className == 'button-deleted') {
+      deletedTaskStorage(label.textContent); // передаем в функцию только 1 фрагмент текста без кнопок
       const li = button.closest('li');
       li.remove();
     }

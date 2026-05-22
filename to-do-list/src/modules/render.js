@@ -1,3 +1,6 @@
+import iconTrashClosed from '../assets/icon/trash-closed.png'
+import iconTrashOpen from '../assets/icon/trash-open.png'
+
 const listTaskCompleted = document.getElementById('list-task-completed');
 const listTaskCompletedWrapper = document.getElementById('list-task-completed-wrapper');
 const labelTaskCompleted = document.getElementById('label-task-completed-container');
@@ -17,9 +20,21 @@ export function addTaskInList(taskName) {
   leftContainer.append(labelTaskName);
 
   const buttonDeletedTask = document.createElement('button');
-  buttonDeletedTask.id = "butDeletedTask";
-  buttonDeletedTask.className = "button";
-  buttonDeletedTask.textContent = "Удалить";
+  buttonDeletedTask.className = "button-deleted";
+
+  const trashClosedIcon = document.createElement('img');
+  trashClosedIcon.src = iconTrashClosed;
+  trashClosedIcon.alt = 'Удалить';
+  trashClosedIcon.className = 'trash-closed';
+
+  const trashOpenIcon = document.createElement('img');
+  trashOpenIcon.src = iconTrashOpen;
+  trashOpenIcon.alt = 'Удалить';
+  trashOpenIcon.className = 'trash-open';
+  
+  buttonDeletedTask.appendChild(trashClosedIcon);
+  buttonDeletedTask.appendChild(trashOpenIcon);
+  
 
   const divTask = document.createElement('div');
   divTask.className = 'task_content';
