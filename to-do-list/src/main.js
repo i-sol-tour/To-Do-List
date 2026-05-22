@@ -1,6 +1,6 @@
 import { addTaskInList, addTaskCompletedInList } from "./modules/render";
 import { checkCompletedTask } from "./modules/render";
-import { addTaskStorage, deletedTaskStorage, tasks } from "./modules/storage";
+import { addTaskStorage, deletedTaskStorage, getTasksStorage} from "./modules/storage";
 import { checkingUniqueTaskName } from "./modules/utils";
 import { displayListTaskCompleted } from "./modules/render";
 import { searchTaskByName } from "./modules/search"
@@ -16,6 +16,15 @@ const inputSearchTask = document.getElementById('input-search-task');
 const buttonSearchTask = document.getElementById('button-task-search');
 const buttonCloseSearchTask = document.getElementById('button-task-close-search');
 
+let tasks = getTasksStorage();
+if (tasks == null) {
+  tasks = {
+    active: [],
+    completed: []
+  }
+  localStorage.setItem('tasks', JSON.stringify(tasks));
+}
+localStorage.setItem('tasks', JSON.stringify(tasks));
 getTasksList();
 
 
@@ -92,6 +101,7 @@ buttonCloseSearchTask.addEventListener('click', () => {
 
 function getTasksList() {
   const tasks = JSON.parse(localStorage.getItem('tasks'));
+  
   for (let task of tasks.active) {
     listTaskActive.append(addTaskInList(task));
   }

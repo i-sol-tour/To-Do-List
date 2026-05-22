@@ -1,10 +1,11 @@
-import { tasks } from './storage.js'
+import { getTasksStorage } from './storage.js'
 import { addTaskInList, addTaskCompletedInList } from './render.js';
 
 const listTaskSearch = document.getElementById('list-task-search-container');
 const searchList = document.getElementById('list-task-search');
 
 export function searchTaskByName(taskName) {
+  let tasks = getTasksStorage();
   listTaskSearch.replaceChildren();
   for (let i = 0; i < tasks.active.length; i++) {
     if (tasks.active[i] == taskName) {

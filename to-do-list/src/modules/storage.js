@@ -1,17 +1,10 @@
-export let tasks = JSON.parse(localStorage.getItem('tasks'));
-if (tasks == null) {
-  tasks = {
-    active: [],
-    completed: []
-  }
-}
-else {
-  localStorage.setItem('tasks', JSON.stringify(tasks));
+export function getTasksStorage() {
+  return JSON.parse(localStorage.getItem('tasks'));
 }
 
 export function addTaskStorage(taskName, type = 'active') {
 
-  const tasks = JSON.parse(localStorage.getItem('tasks'));
+  const tasks = getTasksStorage();
 
   if (type == 'active') {
     tasks.active.unshift(taskName);
@@ -23,7 +16,7 @@ export function addTaskStorage(taskName, type = 'active') {
 }
 
 export function deletedTaskStorage(taskName) {
-  const tasks = JSON.parse(localStorage.getItem('tasks'));
+  const tasks = getTasksStorage();
   for (let i = 0; i < tasks.active.length; i++) {
     if (tasks.active[i] == taskName) {
       tasks.active.splice(i, 1);
