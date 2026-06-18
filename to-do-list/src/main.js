@@ -1,65 +1,81 @@
-import { addTaskActiveInList, addTaskCompletedInList } from "./modules/render";
+import { addTaskInList, addTaskCompletedInList } from "./modules/render";
 import { checkCompletedTask } from "./modules/render";
-import { addTaskStorage, deletedTaskStorage, tasks } from "./modules/storage";
+import { addTaskStorage, deletedTaskStorage, getTasksStorage} from "./modules/storage";
 import { checkingUniqueTaskName } from "./modules/utils";
 import { displayListTaskCompleted } from "./modules/render";
 import { searchTaskByName } from "./modules/search"
 
 const listTaskStandart = document.getElementById('list-task-wrapper');
 const listTaskSearch = document.getElementById('list-task-search-container');
-const formAddTask = document.getElementById('form-add-task');
-const inputTaskNew = document.getElementById('input-task-new');
-const listTaskActive = document.getElementById('list-task-active');
-const listTaskCompleted = document.getElementById('list-task-completed');
+const formAddTask = document.getElementById('form-add-and-search-task');
+const inputTask = document.getElementById('input-task');
+const buttonAddTask = document.getElementById('button-add-task');
+const listTaskActive = document.getElementById('list-task--active');
+const listTaskCompleted = document.getElementById('list-task--completed');
 
-const inputSearchTask = document.getElementById('input-search-task');
-const buttonSearchTask = document.getElementById('button-task-search');
-const buttonCloseSearchTask = document.getElementById('button-task-close-search');
+const buttonSearchTask = document.getElementById('button-search');
 
+let tasks = getTasksStorage();
+if (tasks == null) {
+  tasks = {
+    active: [],
+    completed: []
+  }
+}
+localStorage.setItem('tasks', JSON.stringify(tasks));
 getTasksList();
-
+let statusSearch = false;
 
 formAddTask.addEventListener('submit', (event) => {
   event.preventDefault();
-  if (inputTaskNew.value != '') {
-    if (!checkingUniqueTaskName(inputTaskNew.value)) {
-      alert("Задача с таким название уже существет!");
-      return;
-    };
-    addTaskStorage(inputTaskNew.value);
-    listTaskActive.prepend(addTaskActiveInList(inputTaskNew.value));
-    inputTaskNew.value = '';
+  const button = event.submitter;
+  if (button && button.id == 'button-search'){
+    console.log("Прерывание")
+    return;
+  }
+  if (inputTask.value != '') {
+    if (statusSearch){
+      console.log("Выполнен поиск")
+      listTaskStandart.style.display = 'none';
+      listTaskSearch.style.display = 'block';
+      searchTaskByName(inputTask.value);
+    }
+    else{
+      if (!checkingUniqueTaskName(inputTask.value)) {
+        alert("Задача с таким название уже существет!");
+        return;
+      };
+      addTaskStorage(inputTask.value);
+      listTaskActive.prepend(addTaskInList(inputTask.value));
+      inputTask.value = '';
+    }
   }
 });
 
 listTaskStandart.addEventListener('click', (event) => {
-  console.log("Клик")
   const checkbox = event.target.closest('input');
   const button = event.target.closest('button');
+  const divTaskCompleted = event.target.closest('div');
 
   if (button) {
     const label = button.closest('div')
-      .querySelector('.taskLeftContainer label');
-    if (!label){
+      .querySelector('.task-left-container label');
+    if (!label) {
       return;
     }
-    const liText = label.textContent
-    if (button.id == 'butDeletedTask') {
-      deletedTaskStorage(liText); // передаем в функцию только 1 фрагмент текста без кнопок
+    if (button.className == 'button-deleted') {
+      deletedTaskStorage(label.textContent); // передаем в функцию только 1 фрагмент текста без кнопок
       const li = button.closest('li');
       li.remove();
     }
   };
   if (checkbox) {
     const label = checkbox.parentElement.querySelector('label');
-    if (!label){
-      console.log('lable')
+    if (!label) {
       return;
     }
     const liText = label.textContent
-    console.log("liText", liText)
     if (checkbox.checked == true) {
-      console.log("Перевод в выполнено")
       deletedTaskStorage(liText);
       addTaskStorage(liText, 'complete');
       listTaskCompleted.prepend(addTaskCompletedInList(liText));
@@ -67,41 +83,55 @@ listTaskStandart.addEventListener('click', (event) => {
       li.remove();
     }
   }
-  const divTaskCompleted = event.target.closest('div');
+
   if (divTaskCompleted) {
-    if (divTaskCompleted.id == 'labelTaskCompled') {
-      console.log('Нажата кнопка Завершенные')
+    if (divTaskCompleted.id == 'label-task-completed-container') {
       displayListTaskCompleted();
     }
   };
   checkCompletedTask();
-  console.log(tasks)
 });
 
 buttonSearchTask.addEventListener('click', () => {
-  listTaskStandart.style.display = 'none';
-  listTaskSearch.style.display = 'block';
-  searchTaskByName(inputSearchTask.value);
-});
-
-buttonCloseSearchTask.addEventListener('click', () => {
-  const divToRemove = listTaskSearch.querySelector('div');
-
-  if (divToRemove) {
-    divToRemove.remove();
+  console.log("Нажатие buttonSearchTask")
+  console.log("statusSearch", statusSearch)
+  console.log("inputTask.value = ", inputTask.value)
+  if (statusSearch) {
+    statusSearch = false;
+    
+    listTaskSearch.replaceChildren();
+    listTaskSearch.style.display = 'none';
+    listTaskStandart.style.display = 'block';
+    buttonAddTask.style.display = 'block';
+    inputTask.value = '';
+    inputTask.placeholder = 'Создание задачи';
   }
-  inputSearchTask.value = '';
-  listTaskStandart.style.display = 'block';
-  listTaskSearch.style.display = 'none';
+  else {
+    inputTask.placeholder = 'Поиск задачи';
+    statusSearch = true;
+    listTaskSearch.style.display = 'block';
+    listTaskStandart.style.display = 'none';
+    buttonAddTask.style.display = 'none';
+    if (inputTask.value) {
+      searchTaskByName(inputTask.value);
+    }
+  }  
 });
 
+inputTask.addEventListener('input', () => {
+  console.log("statusSearch= ", statusSearch)
+  if (statusSearch) {
+    console.log("Изменен текст input= ", inputTask.value)
+    searchTaskByName(inputTask.value)
+  }
+});
 
 
 function getTasksList() {
   const tasks = JSON.parse(localStorage.getItem('tasks'));
-  console.log(tasks)
+  
   for (let task of tasks.active) {
-    listTaskActive.append(addTaskActiveInList(task));
+    listTaskActive.append(addTaskInList(task));
   }
   for (let task of tasks.completed) {
     listTaskCompleted.append(addTaskCompletedInList(task));

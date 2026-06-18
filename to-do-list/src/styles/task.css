@@ -1,11 +1,12 @@
 .task {
     background-color: white;
-    border-radius: 10px;
+    border-radius: var(--border-radius);
     list-style: none;
     padding: 10px;
     margin-bottom: 10px;
     opacity: 0.9;
 }
+
 .task:hover {
     opacity: 1;
 }

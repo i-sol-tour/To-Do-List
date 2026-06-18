@@ -1,12 +1,38 @@
+.form-add-and-search-task {
+   display: flex;
+   align-items: center;
+   gap: 15px;
+   width: 500px;
+  margin: 0px 0px 0px 30px;
+   
+}
+
+.input-button-container {
+    display: flex;
+    flex: 1;
+    min-width: 0;
+    gap: 5px;
+    align-items: center;
+}
+
 .list-task-wrapper {
     display: block;
     padding: 10px;
     margin: 20px;
+    width: 95%;
+    background-color:rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
 }
 
 .label-task-completed-container {
     display: block;
     color: white;
+    height: 30px;
+    width: 150px;
+
+    &:hover{
+      cursor: pointer;
+    }
 }
 
 .list-task-completed-wrapper {
@@ -15,11 +41,27 @@
 
 .list-task-search-container {
     display: none;
+    width: 500px;
+    padding: 10px 15px;
 }
 
-.search-container {
-    display: block;
-    margin-left: auto;
-    padding: 10px;
-    
+.task-left-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.task_content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.empty-message-wrapper {
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+    background-color:rgba(255, 255, 255, 0.8);
+    border-radius: 20px;
 }
