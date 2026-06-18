@@ -3,7 +3,6 @@ export function getTasksStorage() {
 }
 
 export function addTaskStorage(taskName, type = 'active') {
-
   const tasks = getTasksStorage();
 
   if (type == 'active') {

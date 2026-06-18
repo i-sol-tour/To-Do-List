@@ -1,3 +1,4 @@
+
 <!doctype html>
 
 <head>
@@ -8,39 +9,37 @@
   <link rel="stylesheet" href="src/styles/form.css">
   <link rel="stylesheet" href="src/styles/task.css">
   <link rel="stylesheet" href="src/styles/components.css">
+  <link rel="stylesheet" href="src/styles/formInputButton.css">
 </head>
 
 <body>
-  <div class="header">
+  <header>
     <h1>Список задач</h1>
-  </div>
+  </header>
   <div class="wrapper">
+
+    <form id="form-add-and-search-task" class="form-add-and-search-task">
+      <div id="input-button-container" class="input-button-container">
+        <input id="input-task" class="input" type="text" placeholder="Создание задачу">
+        <button id="button-add-task" type="submit">+</button>
+      </div>
+      <button id="button-search" class="button-search" aria-label=""></button>
+    </form>
+
     <div id="list-task-wrapper" class="list-task-wrapper">
-      <form id="form-add-task">
-        <input id="input-task-new" class="input" type="text" placeholder="Создайте задачу">
-        <button id="button-task-add" class="button">Добавить</button>
-      </form>
-      <ul id="list-task-active">
+      <ul id="list-task--active">
       </ul>
+
       <div id='label-task-completed-container' class="label-task-completed-container">
         <h3>Завершенные</h3>
       </div>
-      <div id="list-task-completed-wrapper">
-        <ul id="list-task-completed">
-        </ul>
-      </div>
-    </div>
-    <div id="list-task-search-container" class="list-task-search-container">
-      <ul id="list-task-search">
+      <ul id="list-task--completed">
       </ul>
     </div>
-    <div class="search-container">
-      <input type="text" id="input-search-task" class="input" placeholder="Название задачи...">
-      <button id="button-task-search" class="button">Поиск</button>
-      <button id="button-task-close-search" class="button button-close">X</button>
+
+    <div id="list-task-search-container" class="list-task-search-container">
     </div>
   </div>
-
   <script type="module" src="/src/main.js"></script>
 </body>
 

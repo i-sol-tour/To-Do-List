@@ -1,12 +1,20 @@
-.wrapper{
-    display: flex;
-    background-color:rgb(41, 131, 56);
-    font-family: Verdana;
-    min-height: 100vh;
+:root {
+  --primary-color: rgb(41, 131, 56);
+  --header-color: rgb(32, 102, 44);
+  --border-radius: 10px;
+  --font-family: Verdana
 }
 
-.header{
-    background-color:rgb(32, 102, 44);
-    font-family: Verdana;
+header{
+    background-color: var(--header-color);
+    font-family: var(--font-family);
     height: 100px;
+}
+
+.wrapper{
+    display: block;
+    background-color: var(--primary-color);
+    font-family: var(--font-family);
+    min-height: 100vh;
+    padding: 20px;
 }

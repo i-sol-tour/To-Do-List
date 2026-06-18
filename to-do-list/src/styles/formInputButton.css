@@ -1,0 +1,53 @@
+.input-button-container {
+    display: flex;        /* flex-контейнер */
+    flex: 1;             /* занимает все доступное место в родителе */
+    min-width: 0;        /* разрешает сжатие */
+    gap: 5px;      
+    align-items: center;
+}
+.input-button-container input {
+  flex: 1;            /* input растягивается на все доступное место */
+  min-width: 100px;       /* может сжиматься до 100 */
+  width: 90%;
+  padding: 10px 15px;
+  font-size: 16px;
+  border: 1px solid white;
+  border-radius: var(--border-radius);
+
+  transition: all 0.2s ease;
+
+  &:focus  {
+    border: 2px solid var(--header-color);
+    outline: none;
+  }
+}
+
+.input-button-container button {
+  border-radius: var(--border-radius);
+  margin-left: -41px;
+  height: 30px;
+  width: 30px;
+  z-index: 1;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 30px;
+  color: white;
+  background-color: var(--primary-color);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transition: all 0.2s ease;
+
+  &:hover{
+    transform: scale(1.1);
+  }
+
+  &:active {
+    color: var(--primary-color);
+    background-color: white;
+    border: 1px solid var(--primary-color);
+  }
+}

@@ -1,7 +1,7 @@
 import iconTrashClosed from '../assets/icon/trash-closed.png'
 import iconTrashOpen from '../assets/icon/trash-open.png'
 
-const listTaskCompleted = document.getElementById('list-task-completed');
+const listTaskCompleted = document.getElementById('list-task--completed');
 const listTaskCompletedWrapper = document.getElementById('list-task-completed-wrapper');
 const labelTaskCompleted = document.getElementById('label-task-completed-container');
 
@@ -73,10 +73,10 @@ export function checkCompletedTask() {
 }
 
 export function displayListTaskCompleted() {
-  if (listTaskCompletedWrapper.style.display != 'none') {
-    listTaskCompletedWrapper.style.display = 'none';
+  if (listTaskCompleted.style.display != 'none') {
+    listTaskCompleted.style.display = 'none';
   }
   else {
-    listTaskCompletedWrapper.style.display = 'block';
+    listTaskCompleted.style.display = 'block';
   }
 }
